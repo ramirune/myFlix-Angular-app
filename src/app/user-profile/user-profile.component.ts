@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class UserProfileComponent implements OnInit {
   user: any = {};
+  Username = localStorage.getItem('user');
 
   constructor(
     public fetchApiData: UserRegistrationService,
@@ -24,9 +25,10 @@ export class UserProfileComponent implements OnInit {
   }
 
   getUserInfo(): void {
-    let user = JSON.parse(localStorage.getItem('user') || '');
-    this.fetchApiData.getUser(user.Username).subscribe((resp: any) => {
+    this.fetchApiData.getUser(this.Username!).subscribe((resp: any) => {
       this.user = resp;
+      console.log(this.user);
+      return this.user;
     });
   }
 }

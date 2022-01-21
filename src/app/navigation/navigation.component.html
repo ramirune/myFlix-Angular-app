@@ -14,7 +14,7 @@
     <div fxShow="true" fxHide.lt-md="true">
       <a mat-button routerLink="/movies">All Movies</a>
       <a mat-button routerLink="">My Favorites</a>
-      <a mat-button routerLink="/user">My Profile</a>
+      <a mat-button routerLink="/users">My Profile</a>
       <a mat-raised-button>Sign Out</a>
     </div>
   </mat-toolbar>
@@ -29,13 +29,13 @@
       <div fxLayout="column">
         <a mat-button routerLink="/movies">All Movies</a>
         <a mat-button routerLink="">My Favorites</a>
-        <a mat-button routerLink="/user">My Profile</a>
+        <a mat-button routerLink="/users">My Profile</a>
         <a mat-raised-button>Sign Up</a>
       </div>
     </mat-sidenav>
     <mat-sidenav-content fxFlexFill>
       <app-movie-card *ngIf="router.url === '/movies'"></app-movie-card>
-      <app-user-profile *ngIf="router.url === '/user'"></app-user-profile>
+      <app-user-profile *ngIf="router.url === '/users'"></app-user-profile>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

@@ -34,7 +34,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: NavigationComponent },
-  { path: 'user', component: NavigationComponent },
+  { path: 'users', component: NavigationComponent },
 
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
