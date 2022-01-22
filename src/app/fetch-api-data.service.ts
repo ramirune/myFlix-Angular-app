@@ -10,6 +10,13 @@ import { map } from 'rxjs/operators';
 
 // Declaring the api url that will provide data for client app
 const apiUrl = 'https://movie-api-by-tammy.herokuapp.com';
+export interface User {
+  _id: string;
+  FavoriteMovies: Array<string>;
+  Username: string;
+  Email: string;
+  Birthday: Date;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -76,15 +83,13 @@ export class UserRegistrationService {
   }
 
   // Get User by username from API
-  getUser(Username: any): Observable<any> {
+  getUser(Username: string): Observable<any> {
     const token = localStorage.getItem('token');
-    const response = this.http.get(apiUrl + '/users/' + Username, {
-      headers: new HttpHeaders({ Authrization: 'Bearer ' + token }),
-    });
-    return response.pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
+    return this.http
+      .get<User>(apiUrl + '/users/' + Username, {
+        headers: new HttpHeaders({ Authrization: 'Bearer ' + token }),
+      })
+      .pipe(map(this.extractResponseData), catchError(this.handleError));
   }
   /* 
   // Get user's favorite movies
