@@ -3,7 +3,7 @@ import { UserRegistrationService, User } from '../fetch-api-data.service';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+import { EditProfileFormComponent } from '../edit-profile-form/edit-profile-form.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class UserProfileComponent implements OnInit {
   user: any = {};
+  Username = localStorage.getItem('user');
 
   constructor(
     public fetchApiData: UserRegistrationService,
@@ -32,5 +33,21 @@ export class UserProfileComponent implements OnInit {
         console.log(this.user);
       });
     }
+  }
+
+  deleteUser(): void {
+    this.fetchApiData.deleteUser(this.Username).subscribe(() => {
+      this.snackBar.open(`${this.Username} has been removed!`, 'OK', {
+        duration: 4000,
+      });
+      localStorage.clear();
+    });
+    this.router.navigate(['welcome']);
+  }
+
+  openEditProfileFormDialog(): void {
+    this.dialog.open(EditProfileFormComponent, {
+      width: '700px',
+    });
   }
 }

@@ -1,6 +1,37 @@
 <div class="profile-container">
-  <h2>User profile page</h2>
-  <span>Hi {{ user.Username }}</span>
-  <!-- <h1>{{ user.Password }}</h1>
-  <h1>{{ user.Email }}</h1> -->
+  <mat-card class="mat-elevation-z10">
+    <mat-card-header>
+      <mat-card-title>User's Profile</mat-card-title>
+    </mat-card-header>
+    <mat-divider></mat-divider>
+    <div class="content-container">
+      <mat-card-content>
+        <mat-icon>person</mat-icon>
+        <span id="profile-title">Username: </span
+        >{{ user.Username }}</mat-card-content
+      >
+      <mat-card-content>
+        <mat-icon>email </mat-icon>
+        <span id="profile-title">Email: </span
+        >{{ user.Email }}</mat-card-content
+      >
+      <mat-card-content>
+        <mat-icon>cake</mat-icon>
+        <span id="profile-title">Birthday: </span
+        >{{ user.Birthday | date }}</mat-card-content
+      >
+    </div>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        class="edit-btn"
+        (click)="openEditProfileFormDialog()"
+      >
+        Edit Profile
+      </button>
+      <button mat-raised-button class="delete-btn" (click)="deleteUser()">
+        Delete User
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>
