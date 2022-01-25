@@ -11,11 +11,12 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class EditProfileFormComponent implements OnInit {
   Username = localStorage.getItem('user');
-  userProfile = {
-    Username: '',
-    Password: '',
-    Email: '',
-    Birthday: '',
+  user: any = {};
+  @Input() userProfile = {
+    Username: this.user.Username,
+    Password: this.user.Password,
+    Email: this.user.Email,
+    Birthday: this.user.Birthday,
   };
 
   constructor(
@@ -24,7 +25,16 @@ export class EditProfileFormComponent implements OnInit {
     public snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getUser();
+  }
+
+  getUser(): void {
+    const user = localStorage.getItem('user');
+    this.fetchApiData.getUser(user).subscribe((resp: any) => {
+      this.user = resp;
+    });
+  }
 
   editUser(): void {
     this.fetchApiData

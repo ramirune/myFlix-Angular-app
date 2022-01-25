@@ -115,16 +115,19 @@ mat-card-actions {
   font-size: 12px;
 }
 .fav-action {
-  margin-top: 5px;
+  margin-top: 10px;
   display: flex;
-  height: 50px;
+  height: 10px;
 }
 #fav-action-btn {
   color: rgb(202, 167, 8) !important;
 }
-.remove-btn {
-  color: rgb(161, 7, 7);
+.mat-icon-button {
   position: absolute;
   right: 3px;
   top: 3px;
+}
+
+.remove-btn {
+  color: rgb(161, 7, 7) !important;
 }

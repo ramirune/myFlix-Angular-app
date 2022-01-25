@@ -12,8 +12,9 @@ import { SynopsisCardComponent } from '../synopsis-card/synopsis-card.component'
   styleUrls: ['./movie-card.component.scss'],
 })
 export class MovieCardComponent implements OnInit {
-  movies: any[] = [];
+  movies: any = [];
   FavoriteMovies: any[] = [];
+  user: any[] = [];
   constructor(
     public fetchApiData: UserRegistrationService,
     public dialog: MatDialog,
@@ -38,6 +39,7 @@ export class MovieCardComponent implements OnInit {
     const user = localStorage.getItem('user');
     this.fetchApiData.getUser(user).subscribe((resp: any) => {
       this.FavoriteMovies = resp.FavoriteMovies;
+      console.log(this.FavoriteMovies);
     });
   }
 
@@ -94,12 +96,8 @@ export class MovieCardComponent implements OnInit {
     return this.getFavoriteMovies();
   }
 
-  isFavorite(MovieId: string): boolean {
-    if (this.FavoriteMovies.includes(MovieId)) {
-      return true;
-    } else {
-      return false;
-    }
+  isFavorite(MovieID: string): boolean {
+    return this.FavoriteMovies.some((movie) => movie._id === MovieID);
   }
 
   toggleFavorite(movie: any): void {

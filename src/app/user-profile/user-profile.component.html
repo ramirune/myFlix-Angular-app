@@ -86,10 +86,13 @@
       >
         Director
       </button>
-
-      <button mat-icon-button class="remove-btn">
-        <mat-icon>remove_circle</mat-icon>
-      </button>
     </mat-card-actions>
+
+    <button
+      mat-icon-button
+      (click)="removeFavoriteMovie(favorite._id, favorite.title)"
+    >
+      <mat-icon class="remove-btn">remove_circle</mat-icon>
+    </button>
   </mat-card>
 </div>

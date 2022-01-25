@@ -16,8 +16,8 @@ import { SynopsisCardComponent } from '../synopsis-card/synopsis-card.component'
 export class UserProfileComponent implements OnInit {
   user: any = {};
   Username = localStorage.getItem('user');
-  favorites: any[] = [];
-  FavMovies: any = {};
+
+  FavMovies: any[] = [];
 
   constructor(
     public fetchApiData: UserRegistrationService,
@@ -36,17 +36,33 @@ export class UserProfileComponent implements OnInit {
     if (user) {
       this.fetchApiData.getUser(user).subscribe((resp: User) => {
         this.user = resp;
-        this.favorites = resp.FavoriteMovies;
+
         console.log(this.user);
-        console.log(this.favorites);
       });
     }
   }
 
   getFavoriteMovies(): void {
-    this.fetchApiData.getMovie(this.favorites).subscribe((resp: any) => {
-      this.FavMovies = resp;
+    const user = localStorage.getItem('user');
+    this.fetchApiData.getUser(user).subscribe((resp: any) => {
+      this.FavMovies = resp.FavoriteMovies;
       console.log(this.FavMovies);
+      return this.FavMovies;
+    });
+  }
+
+  // remove favorite
+  removeFavoriteMovie(MovieId: string, title: string): void {
+    this.fetchApiData.deleteFavoriteMovie(MovieId).subscribe((resp: any) => {
+      console.log(resp);
+      this.snackBar.open(
+        `${title} has been removed from your favorites!`,
+        'OK',
+        {
+          duration: 4000,
+        }
+      );
+      this.ngOnInit();
     });
   }
 
