@@ -36,11 +36,9 @@ export class MovieCardComponent implements OnInit {
   // fetch user's favorite movies
   getFavoriteMovies(): void {
     const user = localStorage.getItem('user');
-    if (user) {
-      this.fetchApiData.getUser(user).subscribe((resp: any) => {
-        this.FavoriteMovies = resp.FavoriteMovies;
-      });
-    }
+    this.fetchApiData.getUser(user).subscribe((resp: any) => {
+      this.FavoriteMovies = resp.FavoriteMovies;
+    });
   }
 
   openGenreDialog(name: string, description: string): void {

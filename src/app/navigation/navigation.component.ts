@@ -1,8 +1,8 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { map, shareReplay } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+/* import { map, shareReplay } from 'rxjs/operators';
+import { Observable } from 'rxjs'; */
 import { Router } from '@angular/router';
 
 @Component({
