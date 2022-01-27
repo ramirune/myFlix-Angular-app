@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Inject } from '@angular/core';
 import { UserRegistrationService } from '../fetch-api-data.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-edit-profile-form',
@@ -12,6 +11,10 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class EditProfileFormComponent implements OnInit {
   Username = localStorage.getItem('user');
   user: any = {};
+
+  /**
+   *  Binding input values to userProfile object
+   */
   @Input() userProfile = {
     Username: this.user.Username,
     Password: this.user.Password,
@@ -29,6 +32,9 @@ export class EditProfileFormComponent implements OnInit {
     this.getUser();
   }
 
+  /**
+   * get user info
+   */
   getUser(): void {
     const user = localStorage.getItem('user');
     this.fetchApiData.getUser(user).subscribe((resp: any) => {
@@ -36,6 +42,14 @@ export class EditProfileFormComponent implements OnInit {
     });
   }
 
+  /**
+   * updates the user information in API
+   * @function editUser
+   * @param Username {any}
+   * @param userProfile {any}
+   * @return an updated user in json format
+   * then stores it in localstorage. a popup message is displayed after successful updated
+   */
   editUser(): void {
     this.fetchApiData
       .editUser(this.Username, this.userProfile)

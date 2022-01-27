@@ -31,6 +31,12 @@ export class UserProfileComponent implements OnInit {
     this.getFavoriteMovies();
   }
 
+  /**
+   * call API end-point to get the user's information
+   * @function getUser
+   * @param Username
+   * @return user's data in json format
+   */
   getUserInfo(): void {
     const user = localStorage.getItem('user');
     if (user) {
@@ -42,6 +48,9 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  /**
+   * get user's FavoriteMovies from the user's data
+   */
   getFavoriteMovies(): void {
     const user = localStorage.getItem('user');
     this.fetchApiData.getUser(user).subscribe((resp: any) => {
@@ -51,7 +60,13 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-  // remove favorite
+  /**
+   * use API end-point to remove user favorite
+   * @function deleteFavoriteMovie
+   * @param MovieId {string}
+   * @param title {string}
+   * @returns updated user's data in json format
+   */
   removeFavoriteMovie(MovieId: string, title: string): void {
     this.fetchApiData.deleteFavoriteMovie(MovieId).subscribe((resp: any) => {
       console.log(resp);
@@ -66,6 +81,12 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * call API end-point to remove the current user
+   * @function deleteUser
+   * @param Username {any}
+   * @return remove status
+   */
   deleteUser(): void {
     this.fetchApiData.deleteUser(this.Username).subscribe(() => {
       this.snackBar.open(`${this.Username} has been removed!`, 'OK', {
@@ -76,12 +97,20 @@ export class UserProfileComponent implements OnInit {
     this.router.navigate(['welcome']);
   }
 
+  /**
+   * open a dialog to edit the user profile
+   * @module EditProfileFormComponent
+   */
   openEditProfileFormDialog(): void {
     this.dialog.open(EditProfileFormComponent, {
       width: '280px',
     });
   }
-
+  /**
+   *open a dialog to display the GenreCardComponent
+   * @param name {string}
+   * @param description {string}
+   */
   openGenreDialog(name: string, description: string): void {
     this.dialog.open(GenreCardComponent, {
       data: { name: name, description: description },
@@ -89,6 +118,13 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * open a dialog to display the DirectorCardComponent
+   * @param name {string}
+   * @param bio {string}
+   * @param birth {string}
+   * @param death {string}
+   */
   openDirectorDialog(
     name: string,
     bio: string,
@@ -101,6 +137,11 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * open a dialog to display the SynopsisCardComponent
+   * @param title {string}
+   * @param description {string}
+   */
   openSynopsisDialog(title: string, description: string): void {
     this.dialog.open(SynopsisCardComponent, {
       data: { title: title, description: description },
